@@ -6,11 +6,12 @@ palindrome인지 비교하려면 연결 리스트에 있는 값을 list로 저�
 2. 순회가 끝난 후 reversed된 리스트와 원본 리스트를 비교해 palindrome인지 확인
    
 # Complexity
-### Time complexity:
-O(n) : 모든 노드를 순회할 때 O(n)의 시간 복잡도를 가진다. 이후에 두 배열을 비교하는 작업도 O(n)의 시간 복잡도를 가진다. 최종 시간 복잡도는 O(n)이다.
+- Time complexity: 모든 노드를 순회할 때 O(n)의 시간 복잡도를 가진다. 이후에 두 배열을 비교하는 작업도 O(n)의 시간 복잡도를 가진다. 최종 시간 복잡도는 O(n)이다.
+$$O(n)$$
 
-### Space complexity:
-O(n) : 배열을 추가로 사용했기 때문이다.
+- Space complexity: 배열을 추가로 사용했기 때문이다.
+$$O(n)$$
+
 
 # Code
 ```py
