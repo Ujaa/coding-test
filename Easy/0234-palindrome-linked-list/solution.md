@@ -31,7 +31,7 @@ class Solution:
         return nums == nums[::-1]
 ```       
         
-## 개선한 코드
+## 개선한 코드 1
 데크 자료형을 이용해 양 옆의 요소를 동시에 확인하며 palindrome인지 확인하는 시간을 반으로 줄인다.
 
 ```py
@@ -61,4 +61,34 @@ class Solution:
 
         return True
 ```         
-        
+
+## 개선한 코드 2
+러너 기법을 이용한다. 2개의 포인터를 동시에 사용한다.
+
+```py
+# Definition for singly-linked list.
+
+# class ListNode:
+#    def __init__(self, val=0, next=None):
+#        self.val = val
+#        self.next = next
+
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        rev, slow, fast = None, head, head
+
+        while fast and fast.next:
+            fast = fast.next.next
+            rev, rev.next, slow = slow, rev, slow.next
+
+        if fast: # fast가 있다는 것은 홀수개로 존재한다는 의미. 그럼 slow가 딱 가운데에 위치하고 있기 때문에 한 칸 앞으로 옮겨야 함.
+            slow = slow.next
+
+        while rev and rev.val == slow.val:
+            rev = rev.next
+            slow = slow.next
+
+        return not rev
+```
+
+개선한 코드 1, 2는 파이썬 알고리즘 인터뷰 책에 나와있는 내용이다.
