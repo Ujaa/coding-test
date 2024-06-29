@@ -1,6 +1,14 @@
 function solution(a, b) {
     if(a === b) return a;
-    return new Array(Math.abs(a - b) + 1).fill(0)
-        .map((num, i) => i + Math.min(a, b))
-        .reduce((acc, num) => acc + num, 0);
+    
+    const min = Math.min(a, b);
+    const max = Math.max(a, b);
+    
+    let sum = 0;
+    
+    for(let x = min; x <= max ; x++){
+        sum += x;
+    }
+    
+    return sum;
 }
