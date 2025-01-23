@@ -1,42 +1,37 @@
 from collections import deque
 
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
+def bfs(start_x, start_y, visited):
+    que = deque([(start_x, start_y)])
+    visited[start_y][start_x] = 1
+    house_count = 0
 
+    while que:
+      x, y = que.popleft()
+      house_count += 1
 
-def bfs(graph, a, b):
-    n = len(graph)
-    queue = deque()
-    queue.append((a, b))
-    graph[a][b] = 0
-    count = 1
+      for next_x, next_y in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+        if 0 <= next_x < count and 0 <= next_y < count and lines[next_y][next_x] == 1 and visited[next_y][next_x] == 0:
+          visited[next_y][next_x] = 1
+          que.append((next_x, next_y))
 
-    while queue:
-        x, y = queue.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if nx < 0 or nx >= n or ny < 0 or ny >= n:
-                continue
-            if graph[nx][ny] == 1:
-                graph[nx][ny] = 0
-                queue.append((nx, ny))
-                count += 1
-    return count
+    return house_count
 
+def solution(count, lines):
+  houses = []
+  visit_count = 0
+  visited = [[0] * count for _ in range(count)] # [[0] * count] * count x
 
-n = int(input())
-graph = []
-for i in range(n):
-    graph.append(list(map(int, input())))
+  for y in range(count):
+    for x in range(count):
+      if lines[y][x] == 1 and visited[y][x] == 0:
+        houses.append(bfs(x, y, visited))
 
-cnt = []
-for i in range(n):
-    for j in range(n):
-        if graph[i][j] == 1:
-            cnt.append(bfs(graph, i, j))
+  houses.sort()
+  print(len(houses))
+  for house in houses:
+    print(house)
 
-cnt.sort()
-print(len(cnt))
-for i in range(len(cnt)):
-    print(cnt[i])
+count = int(input())
+lines = [list(map(int, input())) for _ in range(count)]
+
+solution(count, lines)
