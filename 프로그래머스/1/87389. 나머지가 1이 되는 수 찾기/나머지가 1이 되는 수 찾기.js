@@ -1,6 +1,10 @@
 function solution(n) {
-    for(let x = 1; x <= n; x++){
-        if(n % x === 1) return x;
+    let x = 2;
+    
+    while (x < n) {
+        if((n - 1) % x == 0) return x;
+        x++;
     }
-    return n;
+    
+    return x;
 }
