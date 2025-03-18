@@ -1,15 +1,28 @@
-def solution(N_count, N, M_count, M):
-  for x in M:
-    if x in N:
-      print(1)
+def find(list, num):
+  start = 0
+  end = len(list) - 1
+
+  while start <= end:
+    mid = (start + end) // 2
+    mid_num = list[mid]
+    if mid_num == num:
+      return 1
+    elif mid_num < num:
+      start = mid + 1
     else:
-      print(0)
+      end = mid - 1
 
-T = int(input())
-for x in range(T):
-  N_count = int(input())
-  N = set(map(int, input().split()))
-  M_count = int(input())
-  M = map(int, input().split())
+  return 0
 
-  solution(N_count, N, M_count, M)
+t = int(input())
+
+for _ in range(t):
+  n = int(input())
+  n_num = list(map(int, input().split()))
+  n_num.sort()
+
+  m = int(input())
+  m_num = list(map(int, input().split()))
+
+  for num in m_num:
+    print(find(n_num, num))
